@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CookMate AI – Survey</title>
+  <link rel="stylesheet" href="cook.css">
+</head>
+
+<body>
+  <main>
+
+    <!-- INTRO -->
+    <section id="intro" class="page">
+      <div class="intro-card animate-pop">
+        <h1 class="brand-title">👋 Welcome to <span class="accent">CookMate AI</span></h1>
+        <p>Your personalised cooking setup starts now!</p>
+        <button id="startBtn" class="start-btn">Start Survey 🚀</button>
+      </div>
+    </section>
+
+    <!-- LOGO -->
+    <section id="hero" class="page hidden">
+      <div class="logo-wrap fade-in">
+        <div class="logo-icon">🍳</div>
+        <h1 class="logo-title">CookMate <span class="accent">AI</span></h1>
+      </div>
+    </section>
+
+    <!-- SURVEY -->
+    <section id="survey" class="page hidden">
+      <div class="survey-box slide-up">
+        <form id="surveyForm">
+          <div id="steps">
+
+            <!-- STEP 1 -->
+            <div class="step">
+              <h2 class="big-title">👨‍👩‍👧 How many family members?</h2>
+
+              <div class="large-btn-group">
+                <button type="button" id="dec" class="large-round-btn">−</button>
+                <input type="number" id="familyCount" value="3" min="1" max="20" class="big-input">
+                <button type="button" id="inc" class="large-round-btn">+</button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step">
+              <h2 class="big-title">🍽 Family Diet Preference</h2>
+
+              <button type="button" class="large-option" data-value="veg">🌱 Vegetarian</button>
+              <button type="button" class="large-option" data-value="nonveg">🍗 Non-Vegetarian</button>
+              <button type="button" class="large-option" data-value="mixed">🍳 Mixed</button>
+
+              <input type="hidden" id="diet">
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step">
+              <h2 class="big-title">🌍 Preferred Cuisines</h2>
+
+              <div class="checkbox-grid">
+                <label class="chk"><input type="checkbox" value="indian"> Indian 🇮🇳</label>
+                <label class="chk"><input type="checkbox" value="italian"> Italian 🇮🇹</label>
+                <label class="chk"><input type="checkbox" value="chinese"> Chinese 🇨🇳</label>
+                <label class="chk"><input type="checkbox" value="mexican"> Mexican 🇲🇽</label>
+                <label class="chk"><input type="checkbox" value="thai"> Thai 🇹🇭</label>
+                <label class="chk"><input type="checkbox" value="korean"> Korean 🇰🇷</label>
+              </div>
+
+              <input type="hidden" id="cuisines">
+            </div>
+
+            <!-- STEP 4 (NEW SPICE PAGE) -->
+            <div class="step">
+              <h2 class="big-title">🌶 Spice Level Preference</h2>
+
+              <button type="button" class="large-option spice" data-value="mild">🙂 Mild</button>
+              <button type="button" class="large-option spice" data-value="medium">😋 Medium</button>
+              <button type="button" class="large-option spice" data-value="spicy">🔥 Spicy</button>
+              <button type="button" class="large-option spice" data-value="extra">🔥🔥 Extra Spicy</button>
+
+              <input type="hidden" id="spice">
+            </div>
+
+          </div>
+
+          <!-- NAVIGATION BUTTONS -->
+          <div class="footer-nav">
+            <button type="button" id="backBtn" class="nav-btn ghost">⬅ Back</button>
+            <button type="button" id="nextBtn" class="nav-btn">Next ➡</button>
+            <button type="submit" id="submitBtn" class="nav-btn primary hidden">Submit ✔</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- HOME -->
+    <section id="home" class="page hidden">
+      <div class="home-card animate-pop">
+        <h1>🍽 CookMate <span class="accent">AI</span></h1>
+        <p>Your data has been saved successfully 🎉</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="cook.js"></script>
+</body>
+</html>
