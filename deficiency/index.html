@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Health Food Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-wrapper">
+    <header class="app-header">
+      <h1>Health Food Recommender 🥗</h1>
+      <p>Type your weakness, deficiency, or condition to see helpful food & recipe ideas.</p>
+    </header>
+
+    <main class="app-main">
+      <section class="card input-card">
+        <h2>What are you facing?</h2>
+        <p class="hint">Examples: <span>iron deficiency</span>, <span>fatigue</span>, <span>anemia</span>, <span>vitamin D</span>, <span>diabetes</span></p>
+
+        <div class="input-row">
+          <input
+            id="conditionInput"
+            type="text"
+            placeholder="Enter your weakness / deficiency / condition..."
+          />
+          <button id="findFoodsBtn">Suggest Foods</button>
+        </div>
+
+        <p class="small-note">
+          This tool gives general food suggestions only. It does <strong>not</strong> replace a doctor.
+        </p>
+      </section>
+
+      <section id="resultsSection" class="card results-card hidden">
+        <h2 id="resultTitle">Suggestions</h2>
+        <div id="resultsContent"></div>
+      </section>
+
+      <section class="card disclaimer-card">
+        <h3>⚠️ Important Disclaimer</h3>
+        <p>
+          This website is for general wellness and educational purposes only.
+          It does <strong>not</strong> diagnose, treat, cure, or prevent any disease.
+          Always consult a qualified doctor or dietitian before making major changes
+          to your diet, especially if you have a medical condition.
+        </p>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Made for learning & awareness 🌱</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
