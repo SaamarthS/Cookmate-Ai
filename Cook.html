@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CookMate AI — Onboarding</title>
+  <link rel="stylesheet" href="cook.css" />
+</head>
+
+<body>
+  <main>
+       
+    <!-- INTRO PAGE -->
+    <section id="intro" class="page">
+      <div class="intro-card animate-pop">
+        <h1 class="brand-title">👋 Welcome to <span class="brand">CookMate AI</span></h1>
+        <p class="intro-p">Your personalised cooking & meal planning companion</p>
+
+        <button id="startBtn" class="start-btn">Start Survey 🚀</button>
+      </div>
+    </section>
+
+    <!-- LOGO PAGE -->
+    <section id="hero" class="page hidden">
+      <div class="logo-wrap animate-float">
+        <div class="logo-icon">🍳</div>
+        <h1 class="logo-title">CookMate <span class="accent">AI</span></h1>
+      </div>
+    </section>
+
+    <!-- SURVEY PAGE -->
+    <section id="survey" class="page hidden">
+      <div class="survey-box animate-card">
+        <form id="surveyForm">
+          <div id="steps">
+
+            <!-- STEP 1 -->
+            <div class="step">
+              <h2>👨‍👩‍👧 Family Members</h2>
+              <div class="num-row">
+                <button type="button" class="btn-round" id="dec">−</button>
+                <input type="number" id="familyCount" min="1" max="20" value="3">
+                <button type="button" class="btn-round" id="inc">+</button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step">
+              <h2>🍽️ Family Diet Preference</h2>
+              <label class="option"><input type="radio" name="diet" value="veg" checked> Vegetarian 🌱</label>
+              <label class="option"><input type="radio" name="diet" value="nonveg"> Non-Vegetarian 🍗</label>
+              <label class="option"><input type="radio" name="diet" value="mixed"> Mixed 🍳</label>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step">
+              <h2>🌍 Favourite Cuisines</h2>
+              <div class="grid-options">
+                <label class="chk"><input type="checkbox" value="indian" checked> Indian 🇮🇳</label>
+                <label class="chk"><input type="checkbox" value="italian"> Italian 🇮🇹</label>
+                <label class="chk"><input type="checkbox" value="chinese"> Chinese 🇨🇳</label>
+                <label class="chk"><input type="checkbox" value="mexican"> Mexican 🇲🇽</label>
+                <label class="chk"><input type="checkbox" value="thai"> Thai 🇹🇭</label>
+                <label class="chk"><input type="checkbox" value="korean"> Korean 🇰🇷</label>
+              </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="step">
+              <h2>🌶️ Spice Tolerance</h2>
+              <label class="option"><input type="radio" name="spice" value="low"> Mild 🙂</label>
+              <label class="option"><input type="radio" name="spice" value="medium" checked> Medium 😋</label>
+              <label class="option"><input type="radio" name="spice" value="high"> Spicy 🔥</label>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="step">
+              <h2>🍛 Foods You Love</h2>
+              <div class="food-grid" id="imageGrid">
+                <div class="food-card" data-key="biryani">🍛 Biryani</div>
+                <div class="food-card" data-key="pizza">🍕 Pizza</div>
+                <div class="food-card" data-key="dosa">🥞 Dosa</div>
+                <div class="food-card" data-key="burger">🍔 Burger</div>
+                <div class="food-card" data-key="ramen">🍜 Ramen</div>
+                <div class="food-card" data-key="pasta">🍝 Pasta</div>
+                <div class="food-card" data-key="friedrice">🍚 Fried Rice</div>
+                <div class="food-card" data-key="tacos">🌮 Tacos</div>
+              </div>
+            </div>
+
+            <!-- STEP 6 -->
+            <div class="step">
+              <h2>📝 Extra Information</h2>
+              <textarea id="extraInfo" placeholder="Allergies, dislikes, favourites…"></textarea>
+            </div>
+
+          </div>
+
+          <!-- NAV BUTTONS -->
+          <div class="nav-row">
+            <button type="button" class="btn ghost" id="backBtn" disabled>Back</button>
+            <button type="button" class="btn" id="nextBtn">Next</button>
+            <button type="submit" class="btn primary hidden" id="submitBtn">Submit</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page hidden">
+      <h1 class="home-title">🍽️ CookMate <span class="accent">AI</span></h1>
+
+      <div class="home-food-grid">
+        <div class="home-card">🍜 Ramen Bowl</div>
+        <div class="home-card">🍝 Creamy Pasta</div>
+        <div class="home-card">🥗 Fresh Salad</div>
+        <div class="home-card">🍛 Indian Thali</div>
+        <div class="home-card">🍣 Sushi Platter</div>
+        <div class="home-card">🍰 Desserts</div>
+      </div>
+
+      <p class="lead">Your personalised homepage is being prepared…</p>
+    </section>
+
+  </main>
+
+  <script src="cook.js"></script>
+</body>
+</html>
