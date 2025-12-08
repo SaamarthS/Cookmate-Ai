@@ -1,0 +1,140 @@
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --muted: #777;
+  --text: #a76f6f;
+  --shadow: 0 10px 25px rgba(0,0,0,0.1);
+  --red: #ffb3b3;
+  --orange: #ffe3b3;
+  --gray: #e7e7e7;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 50%);;
+  font-family: Inter, sans-serif;
+  color: var(--text);
+}
+
+.topbar {
+  padding: 20px;
+  background: rgb(3, 0, 0);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 14px;
+}
+
+.card {
+  background: radial-gradient(circle at top, #1e293b 0, #020617 50%);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.btn.primary {
+  background: #6a8bff;
+  color: white;
+}
+
+.btn.accent {
+  background: #ff6b6b;
+  color: white;
+  width: 100%;
+}
+
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.grocery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.grocery-tile {
+ background: #5fe27b;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: var(--shadow);
+}
+
+.grocery-tile.red {
+  background: #bc4f4f;
+}
+
+.grocery-tile.orange {
+  background: #db8626;
+}
+
+.grocery-tile.gray {
+  background: #3fd939;
+}
+
+.suggestions {
+  position: absolute;
+  background: white;
+  list-style: none;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 8px;
+  margin-top: 40px;
+  width: 240px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestions li {
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hidden { display: none; }
+.remove-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #f00808;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: #ff4b4b;
+}
