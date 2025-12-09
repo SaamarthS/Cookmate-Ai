@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grocery Generator</title>
+  <link rel="stylesheet" href="Grocery_Track.css" />
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>Grocery Generator</h1>
+</header>
+
+<main class="container">
+
+  <!-- Search + Add Section -->
+  <section class="card">
+    <h2>Add Grocery Item</h2>
+
+    <div class="controls">
+      
+      <div class="dropdown">
+        <label style="color:white">Search Ingredient</label>
+        <input id="searchInput" placeholder="Type ingredient...">
+        <ul id="suggestions" class="suggestions hidden"></ul>
+      </div>
+
+      <div class="dropdown">
+        <label style="color:white">Qty (grams)</label>
+        <input id="qtyInput" type="number" min="1" placeholder="Grams">
+      </div>
+
+      <div class="dropdown">
+        <label style="color:white">Expiry Date</label>
+        <input id="expiryInput" type="date">
+      </div>
+
+      <button id="addBtn" class="btn primary">Add</button>
+    </div>
+  </section>
+
+  <!-- Grocery List -->
+  <section class="card">
+    <h2>Grocery List</h2>
+    <button id="copyBtn" class="btn primary" style="float:right; margin-bottom:10px;">
+  Copy Selected
+</button>
+    <div id="groceryList" class="grocery-list"></div>
+  </section>
+
+  <!-- Recipe Generator Button -->
+  <button id="recipeBtn" class="btn accent disabled"  >Recipe Generator</button>
+
+</main>
+
+<script src="ingredients.js"></script>
+<script src="Grocery_Track.js"></script>
+
+</body>
+</html>

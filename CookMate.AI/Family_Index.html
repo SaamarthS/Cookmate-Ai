@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Family Health Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ========== CSS ========== -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 50%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      color: #fff9f9;
+    }
+
+    .app {
+      max-width: 1100px;
+      width: 100%;
+      padding: 24px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* HEADER */
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .app-header h1 {
+      font-size: 1.9rem;
+      margin-bottom: 4px;
+    }
+
+    .app-header p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(8, 0, 0, 0.9);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* MAIN LAYOUT */
+    .app-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top, #1e293b 0, #020617 50%);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.09);
+      backdrop-filter: blur(6px);
+    }
+
+    /* FORM */
+    .form-card h2 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .field {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 0.85rem;
+    }
+
+    .req {
+      color: #f7a414;
+      margin-left: 2px;
+    }
+
+    input,
+    select,
+    textarea {
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+      background: #000000;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #7b5cff;
+      box-shadow: 0 0 0 2px rgba(123, 92, 255, 0.18);
+      background: #f6f5f8;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    code {
+      background: #f7f6f8;
+      padding: 1px 5px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn.primary {
+      background: radial-gradient(circle at top, #1e293b 0, #020617 50%);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255, 92, 138, 0.45);
+    }
+
+    .btn.ghost {
+      background: #ffffff;
+      border: 1px solid #ddd;
+    }
+
+    .btn.danger {
+      background: #f68b21;
+      color: #090000;
+    }
+
+    .btn.small {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 0.95;
+    }
+
+    /* LIST SIDE */
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .list-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .list-header .sub {
+      font-size: 0.78rem;
+      opacity: 0.8;
+    }
+
+    .list-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .list-controls input {
+      min-width: 180px;
+    }
+
+    .empty-state {
+      border-radius: 14px;
+      background: #030009;
+      padding: 14px 12px;
+      font-size: 0.85rem;
+      text-align: center;
+      border: 1px dashed #f3f3f6;
+      margin-top: 10px;
+    }
+
+    .members-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* MEMBER CARD */
+    .member-card {
+      border-radius: 14px;
+      padding: 12px 12px;
+      background: #01010b;
+      border: 1px solid #e1ddff;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .member-main h3 {
+      font-size: 1rem;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: #080000;
+      border: 1px solid #ded8ff;
+      margin-top: 4px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #000000;
+      border: 1px solid #ffc2d9;
+    }
+
+    .notes {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    .member-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    /* FOOTER */
+    .app-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .small-note {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .app-main {
+        grid-template-columns: 1fr;
+      }
+
+      .member-card {
+        grid-template-columns: 1fr;
+      }
+
+      .list-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .list-controls input {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .app {
+        padding: 32px 24px 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div>
+        <h1>Family Health Tracker ❤️</h1>
+        <p>Save deficiencies and diseases of your whole family in one place.</p>
+      </div>
+      <div class="pill">
+        Stored locally in this browser using <strong>localStorage</strong>.
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- LEFT: FORM -->
+      <section class="card form-card">
+        <h2 id="formTitle">Add Family Member</h2>
+
+        <form id="memberForm">
+          <input type="hidden" id="editIndex" value="-1" />
+
+          <div class="field">
+            <label for="name">Name<span class="req">*</span></label>
+            <input id="name" type="text" placeholder="eg. Dad, Mom, Rahul" required />
+          </div>
+
+          <div class="field field-row">
+            <div>
+              <label for="relation">Relation</label>
+              <select id="relation">
+                <option value="">Select relation</option>
+                <option>Self</option>
+                <option>Father</option>
+                <option>Mother</option>
+                <option>Brother</option>
+                <option>Sister</option>
+                <option>Spouse</option>
+                <option>Son</option>
+                <option>Daughter</option>
+                <option>Grandfather</option>
+                <option>Grandmother</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="age">Age</label>
+              <input id="age" type="number" min="0" max="120" placeholder="eg. 45" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="conditions">
+              Deficiencies / Diseases<span class="req">*</span>
+            </label>
+            <textarea
+              id="conditions"
+              rows="3"
+              placeholder="eg. Diabetes, Vitamin D deficiency, Thyroid, Anemia"
+              required
+            ></textarea>
+            <p class="hint">
+              Tip: Separate multiple items with comma ( <code>,</code> ) like:
+              <em>Vitamin B12 deficiency, Hair fall, PCOS</em>
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea
+              id="notes"
+              rows="2"
+              placeholder="Doctor name, medicines, test dates, remarks..."
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="saveBtn">Save Member</button>
+            <button type="button" class="btn ghost" id="resetBtn">Clear Form</button>
+          </div>
+
+          <p class="small-note">
+            This is only for tracking information. It does <strong>not</strong> give medical advice.
+          </p>
+        </form>
+      </section>
+
+      <!-- RIGHT: LIST + FILTER -->
+      <section class="card list-card">
+        <div class="list-header">
+          <div>
+            <h2>Family Members</h2>
+            <p class="sub">
+              Search by name, relation, or disease/deficiency.
+            </p>
+          </div>
+
+          <div class="list-controls">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search: 'diabetes', 'mom', 'vitamin D'..."
+            />
+            <button class="btn danger small" id="clearAllBtn">Clear All</button>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p>👨‍👩‍👧‍👦 No members added yet.</p>
+          <p>Add your first family member using the form on the left.</p>
+        </div>
+
+        <div id="membersList" class="members-list"></div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>For awareness & organisation only • Always follow your doctor 🩺</span>
+    </footer>
+  </div>
+
+  <!-- ========== JS ========== -->
+  <script>
+    const STORAGE_KEY = "familyHealthMembers";
+    let members = [];
+
+    function loadMembers() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        members = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error("Error reading from localStorage", e);
+        members = [];
+      }
+    }
+
+    function saveMembers() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+    }
+
+    function formatDateTime(timestamp) {
+      const d = new Date(timestamp);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleString();
+    }
+
+    function splitConditions(text) {
+      return text
+        .split(",")
+        .map((c) => c.trim())
+        .filter((c) => c.length > 0);
+    }
+
+    function renderMembers(filterText = "") {
+      const list = document.getElementById("membersList");
+      const emptyState = document.getElementById("emptyState");
+
+      list.innerHTML = "";
+
+      const normalized = filterText.trim().toLowerCase();
+
+      const filtered = members.filter((m) => {
+        if (!normalized) return true;
+        const haystack =
+          (m.name + " " + (m.relation || "") + " " + (m.conditionsText || "")).toLowerCase();
+        return haystack.includes(normalized);
+      });
+
+      if (filtered.length === 0) {
+        emptyState.style.display = "block";
+        return;
+      } else {
+        emptyState.style.display = "block";
+        emptyState.style.display = "none";
+      }
+
+      filtered.forEach((member) => {
+        const card = document.createElement("div");
+        card.className = "member-card";
+
+        const main = document.createElement("div");
+        main.className = "member-main";
+
+        const title = document.createElement("h3");
+        title.textContent = member.name || "Unknown";
+        main.appendChild(title);
+
+        const tagline = document.createElement("div");
+        tagline.className = "tagline";
+        const items = [];
+        if (member.relation) items.push(member.relation);
+        if (member.age) items.push(member.age + " yrs");
+        tagline.textContent = items.join(" • ") || "Family Member";
+        main.appendChild(tagline);
+
+        if (member.conditions && member.conditions.length > 0) {
+          const badge = document.createElement("div");
+          badge.className = "badge";
+          badge.textContent = member.conditions.length + " condition(s)/deficiency";
+          main.appendChild(badge);
+
+          const chips = document.createElement("div");
+          chips.className = "chips";
+          member.conditions.forEach((c) => {
+            const chip = document.createElement("span");
+            chip.className = "chip";
+            chip.textContent = c;
+            chips.appendChild(chip);
+          });
+          main.appendChild(chips);
+        }
+
+        if (member.notes) {
+          const notes = document.createElement("div");
+          notes.className = "notes";
+          notes.textContent = "Notes: " + member.notes;
+          main.appendChild(notes);
+        }
+
+        if (member.createdAt) {
+          const ts = document.createElement("div");
+          ts.className = "timestamp";
+          ts.textContent = "Saved on: " + formatDateTime(member.createdAt);
+          main.appendChild(ts);
+        }
+
+        card.appendChild(main);
+
+        const actions = document.createElement("div");
+        actions.className = "member-actions";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "btn ghost small";
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", () => startEditMember(member.id));
+        actions.appendChild(editBtn);
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "btn danger small";
+        delBtn.textContent = "Delete";
+        delBtn.addEventListener("click", () => deleteMember(member.id));
+        actions.appendChild(delBtn);
+
+        card.appendChild(actions);
+        list.appendChild(card);
+      });
+    }
+
+    function addOrUpdateMember(event) {
+      event.preventDefault();
+
+      const nameInput = document.getElementById("name");
+      const relationInput = document.getElementById("relation");
+      const ageInput = document.getElementById("age");
+      const conditionsInput = document.getElementById("conditions");
+      const notesInput = document.getElementById("notes");
+      const editIndexInput = document.getElementById("editIndex");
+
+      const name = nameInput.value.trim();
+      const relation = relationInput.value.trim();
+      const age = ageInput.value.trim();
+      const conditionsText = conditionsInput.value.trim();
+      const notes = notesInput.value.trim();
+      const editIndex = parseInt(editIndexInput.value, 10);
+
+      if (!name) {
+        alert("Please enter a name.");
+        return;
+      }
+      if (!conditionsText) {
+        alert("Please enter at least one deficiency or disease.");
+        return;
+      }
+
+      const conditions = splitConditions(conditionsText);
+      const now = Date.now();
+
+      if (!Number.isNaN(editIndex) && editIndex >= 0 && editIndex < members.length) {
+        const existing = members[editIndex];
+        existing.name = name;
+        existing.relation = relation || "";
+        existing.age = age || "";
+        existing.conditionsText = conditionsText;
+        existing.conditions = conditions;
+        existing.notes = notes;
+        existing.updatedAt = now;
+      } else {
+        const newMember = {
+          id: String(now) + "_" + Math.random(),
+          name,
+          relation: relation || "",
+          age: age || "",
+          conditionsText,
+          conditions,
+          notes,
+          createdAt: now
+        };
+        members.push(newMember);
+      }
+
+      saveMembers();
+      resetForm();
+      renderMembers(document.getElementById("searchInput").value);
+    }
+
+    function startEditMember(id) {
+      const index = members.findIndex((m) => m.id === id);
+      if (index === -1) return;
+
+      const member = members[index];
+
+      document.getElementById("formTitle").textContent = "Edit Family Member";
+      document.getElementById("saveBtn").textContent = "Save Changes";
+
+      document.getElementById("name").value = member.name || "";
+      document.getElementById("relation").value = member.relation || "";
+      document.getElementById("age").value = member.age || "";
+      document.getElementById("conditions").value = member.conditionsText || "";
+      document.getElementById("notes").value = member.notes || "";
+      document.getElementById("editIndex").value = index;
+    }
+
+    function deleteMember(id) {
+      if (!confirm("Delete this member from the list?")) return;
+      members = members.filter((m) => m.id !== id);
+      saveMembers();
+      renderMembers(document.getElementById("searchInput").value);
+    }
+
+    function clearAllMembers() {
+      if (!members.length) return;
+      if (!confirm("Clear all saved family members?")) return;
+      members = [];
+      saveMembers();
+      renderMembers(document.getElementById("searchInput").value);
+    }
+
+    function resetForm() {
+      document.getElementById("memberForm").reset();
+      document.getElementById("editIndex").value = -1;
+      document.getElementById("formTitle").textContent = "Add Family Member";
+      document.getElementById("saveBtn").textContent = "Save Member";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadMembers();
+      renderMembers();
+
+      document.getElementById("memberForm").addEventListener("submit", addOrUpdateMember);
+      document.getElementById("resetBtn").addEventListener("click", resetForm);
+      document.getElementById("clearAllBtn").addEventListener("click", clearAllMembers);
+
+      document.getElementById("searchInput").addEventListener("input", (e) => {
+        renderMembers(e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>

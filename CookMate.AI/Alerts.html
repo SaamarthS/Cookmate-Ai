@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerts Panel</title>
+  <link rel="stylesheet" href="Alerts.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <div id="alerts-panel" class="alerts-panel">
+    <!-- Header -->
+    <div class="header">
+      <h2 class="title">Alerts & Notifications</h2>
+      <p class="subtitle">Stay on top of your kitchen inventory</p>
+    </div>
+
+    <!-- Alert Stats -->
+    <div class="stats-grid">
+      <div class="stat-card low-stock">
+        <div class="stat-content">
+          <div class="stat-icon">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <div>
+            <p class="stat-number" id="low-stock-count">0</p>
+            <p class="stat-label">Low Stock Items</p>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card expiring">
+        <div class="stat-content">
+          <div class="stat-icon">
+            <i data-lucide="clock"></i>
+          </div>
+          <div>
+            <p class="stat-number" id="expiring-count">0</p>
+            <p class="stat-label">Expiring Soon</p>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card total">
+        <div class="stat-content">
+          <div class="stat-icon">
+            <i data-lucide="shopping-cart"></i>
+          </div>
+          <div>
+            <p class="stat-number" id="total-count">0</p>
+            <p class="stat-label">Total Items</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alerts List -->
+    <div class="alerts-list" id="alerts-list">
+      <!-- Alerts will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <script src="Alerts.js"></script>
+</body>
+</html>
